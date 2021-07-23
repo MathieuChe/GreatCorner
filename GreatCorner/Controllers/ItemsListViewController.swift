@@ -11,6 +11,10 @@ import UIKit
 
 class ItemsListViewController: UIViewController {
 
+    
+    //MARK:- properties
+    
+    
     //MARK:- Cycle Life
     
     override func viewDidLoad() {
@@ -19,7 +23,6 @@ class ItemsListViewController: UIViewController {
         // To check if appDelegate is correctly setted.
         view.backgroundColor = .blue
     }
-
 
 }
 
