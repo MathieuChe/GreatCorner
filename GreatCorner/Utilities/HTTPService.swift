@@ -59,10 +59,10 @@ final class HTTPService: Network {
             // Check if request failed
             if let error = error {
                 
-                if HTTPService.successCodeRange.contains(httpResponse.statusCode) {
-                    completion(.failure(HTTPError.fromNSError(error as NSError)))
-                } else {
+                if !HTTPService.successCodeRange.contains(httpResponse.statusCode) {
                     completion(.failure(HTTPError.fromHTTPURLResponse(httpResponse)))
+                } else {
+                    completion(.failure(HTTPError.fromNSError(error as NSError)))
                 }
                 return
             }

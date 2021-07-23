@@ -20,6 +20,8 @@
 		4E0BDCD526AAF27100B2CBA0 /* GetItemsListData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0BDCD426AAF27100B2CBA0 /* GetItemsListData.swift */; };
 		4E0BDCDA26AAF30200B2CBA0 /* IGetItemsListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0BDCD926AAF30200B2CBA0 /* IGetItemsListService.swift */; };
 		4E0BDCE226AAF3B900B2CBA0 /* ErrorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0BDCE126AAF3B900B2CBA0 /* ErrorService.swift */; };
+		4E0BDCE726AAFC6A00B2CBA0 /* ItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0BDCE626AAFC6A00B2CBA0 /* ItemCollectionViewCell.swift */; };
+		4E0BDCED26AB488C00B2CBA0 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0BDCEC26AB488C00B2CBA0 /* Extension.swift */; };
 		4E652A2B26AAB7F4005A64FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E652A2A26AAB7F4005A64FC /* AppDelegate.swift */; };
 		4E652A2F26AAB7F4005A64FC /* ItemsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E652A2E26AAB7F4005A64FC /* ItemsListViewController.swift */; };
 		4E652A3426AAB7F9005A64FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E652A3326AAB7F9005A64FC /* Assets.xcassets */; };
@@ -60,6 +62,8 @@
 		4E0BDCD426AAF27100B2CBA0 /* GetItemsListData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetItemsListData.swift; sourceTree = "<group>"; };
 		4E0BDCD926AAF30200B2CBA0 /* IGetItemsListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGetItemsListService.swift; sourceTree = "<group>"; };
 		4E0BDCE126AAF3B900B2CBA0 /* ErrorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorService.swift; sourceTree = "<group>"; };
+		4E0BDCE626AAFC6A00B2CBA0 /* ItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		4E0BDCEC26AB488C00B2CBA0 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		4E652A2726AAB7F4005A64FC /* GreatCorner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreatCorner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E652A2A26AAB7F4005A64FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E652A2E26AAB7F4005A64FC /* ItemsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsListViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				4E652A2E26AAB7F4005A64FC /* ItemsListViewController.swift */,
+				4E0BDCE626AAFC6A00B2CBA0 /* ItemCollectionViewCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -150,6 +155,21 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		4E0BDCEB26AB487900B2CBA0 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				4E0BDCEC26AB488C00B2CBA0 /* Extension.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		4E0BDCFB26AB497F00B2CBA0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		4E652A1E26AAB7F4005A64FC = {
 			isa = PBXGroup;
 			children = (
@@ -173,6 +193,8 @@
 		4E652A2926AAB7F4005A64FC /* GreatCorner */ = {
 			isa = PBXGroup;
 			children = (
+				4E0BDCFB26AB497F00B2CBA0 /* View */,
+				4E0BDCEB26AB487900B2CBA0 /* Helpers */,
 				4E0BDC9E26AAE13200B2CBA0 /* Utilities */,
 				4E0BDC7326AAD14700B2CBA0 /* Entity */,
 				4E0BDC7F26AAD17600B2CBA0 /* Controllers */,
@@ -340,7 +362,9 @@
 				4E0BDCC726AAE5C600B2CBA0 /* HTTPError.swift in Sources */,
 				4E0BDC6F26AACFA400B2CBA0 /* ImageEntity.swift in Sources */,
 				4E0BDCBD26AAE4BB00B2CBA0 /* HTTPService.swift in Sources */,
+				4E0BDCE726AAFC6A00B2CBA0 /* ItemCollectionViewCell.swift in Sources */,
 				4E0BDC6026AAC56B00B2CBA0 /* ItemModel.swift in Sources */,
+				4E0BDCED26AB488C00B2CBA0 /* Extension.swift in Sources */,
 				4E0BDCE226AAF3B900B2CBA0 /* ErrorService.swift in Sources */,
 				4E652A2F26AAB7F4005A64FC /* ItemsListViewController.swift in Sources */,
 				4E0BDC6526AAC58B00B2CBA0 /* ModelInitializable.swift in Sources */,
