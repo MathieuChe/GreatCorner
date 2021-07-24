@@ -55,9 +55,14 @@ final class ItemsListViewModel: DataCollectionOrTableViewModel, CategoryDelegate
     // Category selected by the user.
     private var categorySelected: CategoryEntity? {
         didSet {
+            // Check if the category is selected, so if category is selected, it's different to nil then display remove filter
+            displayRemoveFilterButton?(categorySelected != nil)
             sortViewableList()
         }
     }
+    
+    // Closure indicates if the remove filter button should be displayed or not.
+    var displayRemoveFilterButton: ((Bool) -> Void)?
 
     init(fetchItemsListService: IGetItemsListService) {
         self.fetchItemsListService = fetchItemsListService
@@ -128,5 +133,9 @@ final class ItemsListViewModel: DataCollectionOrTableViewModel, CategoryDelegate
 
     func didSelectCategory(_ category: CategoryEntity) {
         categorySelected = category
+    }
+    
+    func removeCategoryFilter() {
+        categorySelected = nil
     }
 }

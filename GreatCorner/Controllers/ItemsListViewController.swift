@@ -25,6 +25,8 @@ class ItemsListViewController: UIViewController {
     
     private let viewModel: ItemsListViewModel
     
+    private var removeFilterButton: UIButton!
+    
     init(viewModel: ItemsListViewModel) {
         self.viewModel = viewModel
         
@@ -53,6 +55,7 @@ class ItemsListViewController: UIViewController {
         
         collectionView = setCollectionView()
         setupFilterNavigationBarItem()
+        setupRemoveFilterButton()
     }
     
     private func setupFilterNavigationBarItem() {
@@ -61,18 +64,51 @@ class ItemsListViewController: UIViewController {
         navigationItem.rightBarButtonItem = categoryFilter
     }
     
+    private func setupRemoveFilterButton() {
+        let button = UIButton(type: .custom)
+        button.setTitle("Remove filter", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(removeFilterButtonPressed), for: .touchUpInside)
+        button.isHidden = true
+        button.setupCornerRadius()
+        button.backgroundColor = .orange
+        button.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(button)
+        
+        NSLayoutConstraint.activate([
+            button.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor),
+            button.topAnchor.constraint(equalTo: collectionView.topAnchor),
+            button.widthAnchor.constraint(equalTo: collectionView.widthAnchor, multiplier: 0.3)
+        ])
+        
+        self.removeFilterButton = button
+    }
+    
     // MARK: Button actions
     
     @objc
     private func filterButtonPressed() {
         CategoryViewController.goToCategory(on: self, delegate: viewModel)
     }
+    
+    @objc
+    private func removeFilterButtonPressed() {
+        viewModel.removeCategoryFilter()
+    }
 }
 
+//MARK:- Extension
+
 extension ItemsListViewController {
+    
     func linkCollectionViewToViewModel() {
         viewModel.newDataAvailable = { [weak self ] in
             self?.reloadCollectionViewData()
+        }
+        viewModel.displayRemoveFilterButton = { [weak self] shouldDisplayButton in
+            
+            // Update isHidden Bool depend on displayRemoveFilterButton function
+            self?.removeFilterButton.isHidden = !shouldDisplayButton
         }
     }
     
@@ -92,7 +128,6 @@ extension ItemsListViewController {
         }
     }
 }
-
 
 // MARK: - Collection View DataSource & Delegate
 
