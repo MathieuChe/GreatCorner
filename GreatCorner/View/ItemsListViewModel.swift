@@ -76,7 +76,7 @@ final class ItemsListViewModel: DataCollectionOrTableViewModel {
         }
     }
     
-    //MARK:- Sort items by date
+    //MARK:- Sort items by date and is_urgent
     
     private func sortViewableList() {
         dataView = sortedListItems(itemsList)
