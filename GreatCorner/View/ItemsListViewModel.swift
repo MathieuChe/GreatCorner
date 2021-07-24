@@ -28,7 +28,7 @@ extension DataCollectionOrTableViewModel where List: Collection {
         
         // guard case to avoid any indexPath out of range
         guard case 0...dataView.count = indexPath.row else {
-            fatalError("model object cannot be found at row: \(indexPath.row)!")
+            fatalError("IndexPath's out of range at row: \(indexPath.row). Model Object can't be found!")
         }
         let index = dataView.index(dataView.startIndex, offsetBy: indexPath.row)
         return dataView[index]
@@ -37,8 +37,7 @@ extension DataCollectionOrTableViewModel where List: Collection {
 
 //MARK:- Class
 
-final class ItemsListViewModel: DataCollectionOrTableViewModel {
-    
+final class ItemsListViewModel: DataCollectionOrTableViewModel, CategoryDelegate {
 
     //MARK:- Properties
     
@@ -52,18 +51,18 @@ final class ItemsListViewModel: DataCollectionOrTableViewModel {
 
     // Closure called when new data is available and ready to be displayed
     var newDataAvailable: (() -> Void)?
-
-    init(fetchItemsListService: IGetItemsListService) {
-        self.fetchItemsListService = fetchItemsListService
-        self.itemsList = []
-        self.dataView = []
-    }
     
     // Category selected by the user.
     private var categorySelected: CategoryEntity? {
         didSet {
             sortViewableList()
         }
+    }
+
+    init(fetchItemsListService: IGetItemsListService) {
+        self.fetchItemsListService = fetchItemsListService
+        self.itemsList = []
+        self.dataView = []
     }
 
     //MARK:- Fetch function
@@ -84,17 +83,22 @@ final class ItemsListViewModel: DataCollectionOrTableViewModel {
         }
     }
     
-    //MARK:- Sort items by date and is_urgent
+    //MARK:- Sort items by date, is_urgent and filter by category
     
     private func sortViewableList() {
-        dataView = sortedListItems(itemsList)
+        dataView = sortedItemsList(itemsList, by: categorySelected)
     }
     
-    private func sortedListItems(_ items: [ItemViewModel]) -> [ItemViewModel] {
+    private func sortedItemsList(_ items: [ItemViewModel], by category: CategoryEntity? ) -> [ItemViewModel] {
+        
         let sortedItemsByDate = sortedByDate(items: items)
+        
         let sortedItemsByIsUrgent = sortedByIsUrgent(items: sortedItemsByDate)
         
-        return sortedItemsByIsUrgent
+        // Keep sortedItems and display itemsList filtered by category
+        let filteredItemsByCategory = filteredByCategory(items: sortedItemsByIsUrgent, category)
+
+        return filteredItemsByCategory
     }
     
     private func sortedByDate(items: [ItemViewModel]) -> [ItemViewModel] {
@@ -113,6 +117,13 @@ final class ItemsListViewModel: DataCollectionOrTableViewModel {
             default: return true
             }
         }
+    }
+    
+    func filteredByCategory(items: [ItemViewModel],_ category: CategoryEntity?) -> [ItemViewModel] {
+        guard let category = category else { return items }
+        
+        // Filter items array to check each item category if equal to selectedCategory
+        return items.filter {$0.category == category}
     }
 
     func didSelectCategory(_ category: CategoryEntity) {
