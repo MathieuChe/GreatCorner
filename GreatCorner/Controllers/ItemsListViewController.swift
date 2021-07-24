@@ -83,7 +83,7 @@ extension ItemsListViewController {
 // MARK: - Collection View DataSource & Delegate
 
 extension ItemsListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.numberOfItemsIn(section)
     }

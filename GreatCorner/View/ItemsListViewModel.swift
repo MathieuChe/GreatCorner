@@ -42,13 +42,13 @@ final class ItemsListViewModel: DataCollectionOrTableViewModel {
     //MARK:- Need to add many inputs and outputs
     let fetchItemsListService : IGetItemsListService
 
-    // Array of ads fetched from the API, dont use it to display it, use viewableList property instead
+    // Array of items fetched from the API, dont use it to display it, use viewableList property instead
     var itemsList: [ItemViewModel] { didSet { sortViewableList() } }
     
 
     // MARK: Outputs
 
-    // Array of ads built from rawList property used to be display as wanted. Can be sorted. filtered, etc.
+    // Array of items built from rawList property used to be display as wanted. Can be sorted. filtered, etc.
     var dataView: [ItemViewModel] { didSet { newDataAvailable?() } }
 
     // Closure called when new data is available and ready to be displayed
