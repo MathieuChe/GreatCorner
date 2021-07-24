@@ -34,7 +34,6 @@ final class ItemCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.numberOfLines = 2
         label.textColor = .black
-        label.text = "Hello"
         label.font = UIFont.boldSystemFont(ofSize: 16.0)
         return label
     }()
@@ -43,7 +42,6 @@ final class ItemCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.textColor = .orange
         label.numberOfLines = 1
-        label.text = "10€"
         label.font = UIFont.boldSystemFont(ofSize: 14.0)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -82,6 +80,7 @@ final class ItemCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // To prepare any clean up necessary to the view before reusing
     override func prepareForReuse() {
         super.prepareForReuse()
         pictureImageView.image = nil
@@ -170,7 +169,7 @@ final class ItemCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupBottomElements() {
-        let bottomStackView = UIStackView()
+        let bottomStackView: UIStackView = UIStackView()
         bottomStackView.axis = .vertical
         bottomStackView.distribution = .fillProportionally
         bottomStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -187,7 +186,7 @@ final class ItemCollectionViewCell: UICollectionViewCell {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         bottomStackView.addArrangedSubview(titleLabel)
         
-        let secondLineStackView = UIStackView()
+        let secondLineStackView: UIStackView = UIStackView()
         secondLineStackView.axis = .horizontal
         secondLineStackView.translatesAutoresizingMaskIntoConstraints = false
         bottomStackView.addArrangedSubview(secondLineStackView)
@@ -204,4 +203,34 @@ final class ItemCollectionViewCell: UICollectionViewCell {
     
     //MARK:- Config Cell
         
+    func configure(with model: ItemCellUIModel) {
+        configTitleLabel(with: model.title)
+        configPriceLabel(with: model.price)
+        configCategoryLabel(with: model.categoryDescription ?? "")
+        configIsUrgentPicture(with: model.isUrgentPictureImageName)
+        configImageView(with: model.imageUrl, or: model.defaultPictureImageName)
+    }
+    
+    func configTitleLabel(with title: String) {
+        titleLabel.text = title
+    }
+    
+    func configPriceLabel(with price: Double) {
+        priceLabel.text = "\(price)0 €"
+    }
+    
+    func configCategoryLabel(with category: String) {
+        categoryLabel.text = category
+    }
+    
+    func configIsUrgentPicture(with isUrgentImageName: String?) {
+        if let imageName = isUrgentImageName {
+            isUrgentPictureImageView.image = UIImage(named: imageName)
+        }
+    }
+    
+    func configImageView(with url: URL?, or emptyImageName: String) {
+        let placeholderImage = UIImage(named: emptyImageName)
+        imageTask = pictureImageView.downloadImageFromURL(url, with: placeholderImage)
+    }
 }

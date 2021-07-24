@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ItemsListViewController.swift
 //  GreatCorner
 //
 //  Created by Mathieu Chelim on 23/07/2021.
@@ -10,7 +10,7 @@ import UIKit
 //MARK:- Class
 
 class ItemsListViewController: UIViewController {
-
+    
     
     //MARK:- properties
     
@@ -22,7 +22,18 @@ class ItemsListViewController: UIViewController {
     private let minimumLineSpacing:          CGFloat = 30.0
     private let horizontalInset:             CGFloat = 5.0
     private let margins:                     CGFloat = 5.0
-
+    
+    private let viewModel: ItemsListViewModel
+    
+    init(viewModel: ItemsListViewModel) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     //MARK:- Cycle Life
     
@@ -30,39 +41,73 @@ class ItemsListViewController: UIViewController {
         super.viewDidLoad()
         
         setupCollectionView()
+        linkCollectionViewToViewModel()
+        configureCollectionView()
     }
     
     //MARK:- Setup Function
-
+    
     private func setupCollectionView() {
         view.backgroundColor = .white
-        navigationItem.title = "ThePlaceToBe"
+        navigationItem.title = "GreatCorner"
         
         collectionView = setCollectionView()
     }
 }
 
+extension ItemsListViewController {
+    func linkCollectionViewToViewModel() {
+        viewModel.newDataAvailable = { [weak self ] in
+            self?.reloadCollectionViewData()
+        }
+    }
+    
+    func configureCollectionView() {
+        viewModel.fetchListItems { [weak self ] error in
+            if let error: ErrorService = error {
+                ErrorPresenter.showError(message: error.localizedDescription, on: self, dismissAction: nil)
+            }
+        }
+    }
+    
+    func reloadCollectionViewData() {
+        DispatchQueue.main.async {
+            self.collectionView.performBatchUpdates({
+                self.collectionView.reloadSections(IndexSet(integer: 0))
+            }, completion: nil)
+        }
+    }
+}
+
+
 // MARK: - Collection View DataSource & Delegate
 
 extension ItemsListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30
+        return viewModel.numberOfItemsIn(section)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell( withReuseIdentifier: ItemCollectionViewCell.identifier, for: indexPath)
+        guard let cell: ItemCollectionViewCell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: ItemCollectionViewCell.identifier,
+            for: indexPath
+        ) as? ItemCollectionViewCell else {
+            fatalError("Error cell dequeue")
+        }
+        
+        let model: ItemViewModel = viewModel.elementAt(indexPath)
+        cell.configure(with: model)
         
         return cell
     }
     
     func setCollectionView() -> UICollectionView {
-        let collectionViewLayout = setCollectionViewLayout(with: view.frame)
-        let collectionView = UICollectionView(frame: view.frame, collectionViewLayout: collectionViewLayout)
-        collectionView.delegate = self
+        let collectionViewLayout: UICollectionViewFlowLayout = setCollectionViewLayout(with: view.frame)
+        let collectionView: UICollectionView = UICollectionView(frame: view.frame, collectionViewLayout: collectionViewLayout)
         collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.backgroundColor = .white
-        collectionView.layer.borderWidth = 1
-        collectionView.layer.borderColor = UIColor.black.cgColor
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
         
@@ -81,30 +126,27 @@ extension ItemsListViewController: UICollectionViewDelegate, UICollectionViewDat
         return collectionView
     }
     
-
+    
     //MARK:- CollectionView Layout
     
     func setCollectionViewLayout(with frame: CGRect) -> UICollectionViewFlowLayout {
-        let itemsHorizontalInset = minimumItemsSpacing
-        let collectionViewWidth = frame.width - 3 * margins
-        
+        let collectionViewWidth: CGFloat = frame.width - 3 * margins
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.itemSize = sizeForItem(collectionViewWidth: collectionViewWidth)
+        flowLayout.scrollDirection = .vertical
         flowLayout.minimumInteritemSpacing = minimumItemsSpacing
         flowLayout.minimumLineSpacing = minimumLineSpacing
-        flowLayout.sectionInset = UIEdgeInsets(top: 0.0, left: itemsHorizontalInset, bottom: 0.0, right: itemsHorizontalInset)
-        flowLayout.scrollDirection = .vertical
         
         return flowLayout
     }
     
     func sizeForItem(collectionViewWidth: CGFloat) -> CGSize {
-        let numberOfItem = CGFloat(numberOfItemByRow)
-        let itemWidth = collectionViewWidth / numberOfItem - horizontalInset
-        let itemHeight = itemWidth * cellAspectRatio
+        let numberOfItem: CGFloat = CGFloat(numberOfItemByRow)
+        let itemWidth: CGFloat = collectionViewWidth / numberOfItem - horizontalInset
+        let itemHeight: CGFloat = itemWidth * cellAspectRatio
         
         return CGSize(width: itemWidth, height: itemHeight)
     }
-
+    
 }
 

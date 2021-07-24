@@ -1,5 +1,5 @@
 //
-//  Navigator.swift
+//  RootNavigator.swift
 //  GreatCorner
 //
 //  Created by Mathieu Chelim on 23/07/2021.
@@ -23,14 +23,25 @@ protocol NavCoordinator {
 
 final class RootNavigator: NavCoordinator {
     
-    var navigationController: UINavigationController
+    // MARK: Controller in charge of Navigation
+    let navigationController: UINavigationController
+    
+    // MARK: Dependency property to inject
+    private let httpService: HTTPService
+    private let httpConfiguration: HTTPConfiguration
+    
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
+        self.httpConfiguration = HTTPConfiguration()
+        self.httpService = HTTPService()
     }
     
     func startPoint() {
-        let viewController = ItemsListViewController()
+        let dataAccess = HTTPListItemsDataAccessor(httpService: httpService, httpConfiguration: httpConfiguration)
+        let fetchItemsListService = ItemsListService(dataAccessor: dataAccess)
+        let viewModel = ItemsListViewModel(fetchItemsListService: fetchItemsListService)
+        let viewController = ItemsListViewController(viewModel: viewModel)
         navigationController.setViewControllers([viewController], animated: true)
     }
     
