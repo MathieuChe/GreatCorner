@@ -43,7 +43,8 @@ final class ItemsListViewModel: DataCollectionOrTableViewModel {
     let fetchItemsListService : IGetItemsListService
 
     // Array of ads fetched from the API, dont use it to display it, use viewableList property instead
-    var itemsList: [ItemViewModel] { didSet { setViewableList() } }
+    var itemsList: [ItemViewModel] { didSet { sortViewableList() } }
+    
 
     // MARK: Outputs
 
@@ -75,7 +76,34 @@ final class ItemsListViewModel: DataCollectionOrTableViewModel {
         }
     }
     
-    private func setViewableList() {
-        dataView = itemsList
+    //MARK:- Sort items by date and is_urgent
+    
+    private func sortViewableList() {
+        dataView = sortedListItems(itemsList)
+    }
+    
+    private func sortedListItems(_ items: [ItemViewModel]) -> [ItemViewModel] {
+        let sortedItemsByDate = sortedByDate(items: items)
+        let sortedItemsByIsUrgent = sortedByIsUrgent(items: sortedItemsByDate)
+        
+        return sortedItemsByIsUrgent
+    }
+    
+    private func sortedByDate(items: [ItemViewModel]) -> [ItemViewModel] {
+        return items.sorted {
+            guard let date = $0.creationDate else { return false }
+            guard let nextDate = $1.creationDate else { return false }
+            return date < nextDate
+        }
+    }
+    
+    func sortedByIsUrgent(items: [ItemViewModel]) -> [ItemViewModel] {
+        return items.sorted {
+            // Compare 1 by 1 to sort urgent item
+            switch ($0.isUrgent, $1.isUrgent) {
+            case (false, true): return false
+            default: return true
+            }
+        }
     }
 }
