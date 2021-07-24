@@ -7,6 +7,11 @@
 
 import UIKit
 
+//MARK:- Protocol
+
+protocol CategoryDelegate: class {
+    func didSelectCategory(_ category: CategoryEntity)
+}
 
 //MARK:- Class
 
@@ -19,6 +24,9 @@ final class CategoryViewController: UIViewController, UITableViewDataSource, UIT
     
     private let tableViewHeaderTitle: String = "Categories: Select one"
     
+    // Use class protocol CategoryDelegate to type delegate variable
+    private weak var delegate: CategoryDelegate?
+    
     private init() {
         self.viewModel = CategoryViewModel()
         
@@ -30,7 +38,7 @@ final class CategoryViewController: UIViewController, UITableViewDataSource, UIT
     }
     
     //MARK:- Cycle Life
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -38,8 +46,9 @@ final class CategoryViewController: UIViewController, UITableViewDataSource, UIT
     
     //MARK:- Functions
     
-    static func goToCategory(on viewController: UIViewController) {
+    static func goToCategory(on viewController: UIViewController, delegate: CategoryDelegate) {
         let vc = CategoryViewController()
+        vc.delegate = delegate
         viewController.present(vc, animated: true, completion: nil)
     }
     
@@ -84,6 +93,8 @@ final class CategoryViewController: UIViewController, UITableViewDataSource, UIT
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let categorySelected = viewModel.elementAt(indexPath)
-        print("categorySelected ", categorySelected)
+        dismiss(animated: true) { [weak self] in
+            self?.delegate?.didSelectCategory(categorySelected)
+        }
     }
 }

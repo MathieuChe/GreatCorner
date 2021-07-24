@@ -65,7 +65,7 @@ class ItemsListViewController: UIViewController {
     
     @objc
     private func filterButtonPressed() {
-        CategoryViewController.goToCategory(on: self)
+        CategoryViewController.goToCategory(on: self, delegate: viewModel)
     }
 }
 
