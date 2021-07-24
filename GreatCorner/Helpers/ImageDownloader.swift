@@ -9,12 +9,24 @@ import UIKit
 
 final class ImageDownloader {
     
+    //MARK:- Properties
+    
     // Create a singleton
     static var shared = ImageDownloader()
     
+    private static var cache = ImageCache()
+    
     private static let successCodeRange = 200..<300
     
+    //MARK:- URLSession Task
+    
     static func download(from url: URL, completion: @escaping (UIImage?, HTTPError?) -> Void) -> URLSessionTask? {
+        
+        // verify the cache. If there is data from the cache it gonna retrieve image.
+        if let cachedImage = cache.retrieveImageFromCache(with: url) {
+            completion(cachedImage, nil)
+            return nil
+        }
         
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             // HTTP request will always respond with a response of type HTTPURLResponse
@@ -35,6 +47,8 @@ final class ImageDownloader {
                 return
             }
             
+            // Store Image in cache
+            cache.storeImageInCache(image, for: url)
             completion(image, nil)
         }
         
