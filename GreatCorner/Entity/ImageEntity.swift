@@ -7,12 +7,16 @@
 
 import Foundation
 
+// Set Image Entity with attributes
+
 struct ImageEntity: ModelInitializable {
     let smallImageUrl: URL?
     let thumbImageUrl: URL?
+    let defaultImageName: String
     
     init(from model: ImageModel) {
         self.smallImageUrl = URL(string: model.small ?? "")
         self.thumbImageUrl = URL(string: model.large ?? "")
+        self.defaultImageName = "No_photo"
     }
 }
