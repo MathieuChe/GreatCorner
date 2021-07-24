@@ -52,6 +52,20 @@ class ItemsListViewController: UIViewController {
         navigationItem.title = "GreatCorner"
         
         collectionView = setCollectionView()
+        setupFilterNavigationBarItem()
+    }
+    
+    private func setupFilterNavigationBarItem() {
+        let categoryFilter = UIBarButtonItem(title: "Categories >", style: .plain, target: self, action: #selector(filterButtonPressed))
+        categoryFilter.tintColor = .orange
+        navigationItem.rightBarButtonItem = categoryFilter
+    }
+    
+    // MARK: Button actions
+    
+    @objc
+    private func filterButtonPressed() {
+        print("GoToCategory")
     }
 }
 
