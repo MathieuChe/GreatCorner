@@ -84,8 +84,9 @@ final class ItemsListViewModel: DataCollectionOrTableViewModel {
     
     private func sortedListItems(_ items: [ItemViewModel]) -> [ItemViewModel] {
         let sortedItemsByDate = sortedByDate(items: items)
-                        
-        return sortedItemsByDate
+        let sortedItemsByIsUrgent = sortedByIsUrgent(items: sortedItemsByDate)
+        
+        return sortedItemsByIsUrgent
     }
     
     private func sortedByDate(items: [ItemViewModel]) -> [ItemViewModel] {
@@ -93,6 +94,16 @@ final class ItemsListViewModel: DataCollectionOrTableViewModel {
             guard let date = $0.creationDate else { return false }
             guard let nextDate = $1.creationDate else { return false }
             return date < nextDate
+        }
+    }
+    
+    func sortedByIsUrgent(items: [ItemViewModel]) -> [ItemViewModel] {
+        return items.sorted {
+            // Compare 1 by 1 to sort urgent item
+            switch ($0.isUrgent, $1.isUrgent) {
+            case (false, true): return false
+            default: return true
+            }
         }
     }
 }
