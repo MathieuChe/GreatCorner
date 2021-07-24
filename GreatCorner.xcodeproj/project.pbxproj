@@ -30,6 +30,9 @@
 		4E0BDD3F26AB574600B2CBA0 /* ErrorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0BDD3E26AB574600B2CBA0 /* ErrorPresenter.swift */; };
 		4E0BDD5026AC304100B2CBA0 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0BDD4F26AC304100B2CBA0 /* DateFormatter.swift */; };
 		4E0BDD5B26AC373D00B2CBA0 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0BDD5A26AC373D00B2CBA0 /* ImageCache.swift */; };
+		4E0BDD6626AC5B7200B2CBA0 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0BDD6526AC5B7200B2CBA0 /* CategoryModel.swift */; };
+		4E0BDD6B26AC5BBF00B2CBA0 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0BDD6A26AC5BBF00B2CBA0 /* CategoryViewModel.swift */; };
+		4E0BDD7026AC5C3400B2CBA0 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0BDD6F26AC5C3400B2CBA0 /* CategoryViewController.swift */; };
 		4E652A2B26AAB7F4005A64FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E652A2A26AAB7F4005A64FC /* AppDelegate.swift */; };
 		4E652A2F26AAB7F4005A64FC /* ItemsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E652A2E26AAB7F4005A64FC /* ItemsListViewController.swift */; };
 		4E652A3426AAB7F9005A64FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E652A3326AAB7F9005A64FC /* Assets.xcassets */; };
@@ -80,6 +83,9 @@
 		4E0BDD3E26AB574600B2CBA0 /* ErrorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPresenter.swift; sourceTree = "<group>"; };
 		4E0BDD4F26AC304100B2CBA0 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		4E0BDD5A26AC373D00B2CBA0 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		4E0BDD6526AC5B7200B2CBA0 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
+		4E0BDD6A26AC5BBF00B2CBA0 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
+		4E0BDD6F26AC5C3400B2CBA0 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		4E652A2726AAB7F4005A64FC /* GreatCorner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreatCorner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E652A2A26AAB7F4005A64FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E652A2E26AAB7F4005A64FC /* ItemsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsListViewController.swift; sourceTree = "<group>"; };
@@ -134,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				4E652A2E26AAB7F4005A64FC /* ItemsListViewController.swift */,
+				4E0BDD6F26AC5C3400B2CBA0 /* CategoryViewController.swift */,
 				4E0BDCE626AAFC6A00B2CBA0 /* ItemCollectionViewCell.swift */,
 			);
 			path = Controllers;
@@ -143,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				4E0BDC6426AAC58B00B2CBA0 /* ModelInitializable.swift */,
+				4E0BDD6526AC5B7200B2CBA0 /* CategoryModel.swift */,
 				4E0BDC5F26AAC56B00B2CBA0 /* ItemModel.swift */,
 				4E0BDC6926AAC5E200B2CBA0 /* ImageModel.swift */,
 			);
@@ -189,6 +197,7 @@
 			children = (
 				4E0BDD1B26AB502A00B2CBA0 /* ItemCellUIModel.swift */,
 				4E0BDD2026AB506400B2CBA0 /* ItemViewModel.swift */,
+				4E0BDD6A26AC5BBF00B2CBA0 /* CategoryViewModel.swift */,
 				4E0BDD3926AB536000B2CBA0 /* ItemsListViewModel.swift */,
 			);
 			path = View;
@@ -379,6 +388,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E0BDD6B26AC5BBF00B2CBA0 /* CategoryViewModel.swift in Sources */,
 				4E0BDCDA26AAF30200B2CBA0 /* IGetItemsListService.swift in Sources */,
 				4E0BDCB526AAE48900B2CBA0 /* HTTPConfiguration.swift in Sources */,
 				4E0BDCB026AAE3E600B2CBA0 /* HTTPRequest.swift in Sources */,
@@ -395,12 +405,14 @@
 				4E0BDCE226AAF3B900B2CBA0 /* ErrorService.swift in Sources */,
 				4E0BDD5B26AC373D00B2CBA0 /* ImageCache.swift in Sources */,
 				4E0BDD5026AC304100B2CBA0 /* DateFormatter.swift in Sources */,
+				4E0BDD6626AC5B7200B2CBA0 /* CategoryModel.swift in Sources */,
 				4E0BDD3F26AB574600B2CBA0 /* ErrorPresenter.swift in Sources */,
 				4E652A2F26AAB7F4005A64FC /* ItemsListViewController.swift in Sources */,
 				4E0BDD2126AB506400B2CBA0 /* ItemViewModel.swift in Sources */,
 				4E0BDC6526AAC58B00B2CBA0 /* ModelInitializable.swift in Sources */,
 				4E0BDCD526AAF27100B2CBA0 /* GetItemsListData.swift in Sources */,
 				4E0BDC5B26AAC55100B2CBA0 /* ItemEntity.swift in Sources */,
+				4E0BDD7026AC5C3400B2CBA0 /* CategoryViewController.swift in Sources */,
 				4E652A2B26AAB7F4005A64FC /* AppDelegate.swift in Sources */,
 				4E652A6426AAB8D2005A64FC /* RootNavigator.swift in Sources */,
 				4E0BDC6A26AAC5E200B2CBA0 /* ImageModel.swift in Sources */,
