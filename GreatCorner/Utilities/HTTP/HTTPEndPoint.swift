@@ -1,5 +1,5 @@
 //
-//  HTTP.swift
+//  HTTPEndPoint.swift
 //  GreatCorner
 //
 //  Created by Mathieu Chelim on 23/07/2021.

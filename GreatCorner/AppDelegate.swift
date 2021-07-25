@@ -9,7 +9,7 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
     var rootCoordinator: RootNavigator!
     
@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = window
         
         startRootCoordinator(with: navigationController)
-                
+        
         return true
     }
     
@@ -32,6 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         rootCoordinator = RootNavigator(navigationController: navigationController)
         rootCoordinator.startPoint()
     }
-
+    
 }
 

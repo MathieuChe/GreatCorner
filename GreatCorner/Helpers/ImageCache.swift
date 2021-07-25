@@ -12,6 +12,7 @@ import UIKit
 
 final class ImageCache {
     
+    // Lock to coordinate the operation of multiple threads of execution within the same application.
     private let lock: NSLock = NSLock()
     
     private let imagesCountLimit: Int = 300

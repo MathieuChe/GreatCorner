@@ -12,18 +12,18 @@ import Foundation
 protocol DataCollectionOrTableViewModel {
     associatedtype List: Sequence
     var dataView: List { get }
-
+    
     func numberOfItemsIn(_ section: Int) -> Int
     func elementAt(_ indexPath: IndexPath) -> List.Element
 }
 
 // Collection Protocol to handle index
 extension DataCollectionOrTableViewModel where List: Collection {
-
+    
     func numberOfItemsIn(_ section: Int) -> Int {
         return dataView.count
     }
-
+    
     func elementAt(_ indexPath: IndexPath) -> List.Element {
         
         // guard case to avoid any indexPath out of range
@@ -38,17 +38,17 @@ extension DataCollectionOrTableViewModel where List: Collection {
 //MARK:- Class
 
 final class ItemsListViewModel: DataCollectionOrTableViewModel, CategoryDelegate {
-
+    
     //MARK:- Properties
     
     let fetchItemsListService : IGetItemsListService
-
+    
     // Array of items fetched from the API, dont use it to display it, use itemsList property instead
     var itemsList: [ItemViewModel] { didSet { sortViewableList() } }
     
     // Array of items built from dataView property used to be display as wanted. Can be sorted. filtered, etc.
     var dataView: [ItemViewModel] { didSet { newDataAvailable?() } }
-
+    
     // Closure called when new data is available and ready to be displayed
     var newDataAvailable: (() -> Void)?
     
@@ -63,14 +63,14 @@ final class ItemsListViewModel: DataCollectionOrTableViewModel, CategoryDelegate
     
     // Closure indicates if the remove filter button should be displayed or not.
     var displayRemoveFilterButton: ((Bool) -> Void)?
-
+    
     init(fetchItemsListService: IGetItemsListService) {
         self.fetchItemsListService = fetchItemsListService
         self.itemsList = []
         self.dataView = []
     }
-
-    //MARK:- Fetch function
+    
+    //MARK:- Fetch Items function
     
     func fetchListItems(completion: @escaping (ErrorService?) -> Void) {
         fetchItemsListService.fetchListItems { [weak self] (result: Result<[ItemEntity], ErrorService>) in
@@ -81,7 +81,7 @@ final class ItemsListViewModel: DataCollectionOrTableViewModel, CategoryDelegate
                 let itemsViewModels = itemsEntity.map(ItemViewModel.init)
                 self?.itemsList = itemsViewModels
                 completion(nil)
-
+                
             case .failure(let error):
                 completion(error)
             }
@@ -102,7 +102,7 @@ final class ItemsListViewModel: DataCollectionOrTableViewModel, CategoryDelegate
         
         // Keep sortedItems and display itemsList filtered by category
         let filteredItemsByCategory = filteredByCategory(items: sortedItemsByIsUrgent, category)
-
+        
         return filteredItemsByCategory
     }
     
@@ -130,7 +130,7 @@ final class ItemsListViewModel: DataCollectionOrTableViewModel, CategoryDelegate
         // Filter items array to check each item category if equal to selectedCategory
         return items.filter {$0.category == category}
     }
-
+    
     func didSelectCategory(_ category: CategoryEntity) {
         categorySelected = category
     }

@@ -16,7 +16,7 @@ struct ImageEntity: ModelInitializable {
     
     init(from model: ImageModel) {
         self.smallImageUrl = URL(string: model.small ?? "")
-        self.thumbImageUrl = URL(string: model.large ?? "")
+        self.thumbImageUrl = URL(string: model.thumb ?? "")
         self.defaultImageName = "No_photo"
     }
 }

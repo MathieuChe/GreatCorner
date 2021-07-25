@@ -7,6 +7,10 @@
 
 import UIKit
 
+//MARK:- Protocol Delegate
+
+protocol ItemDelegate: class { func didSelectItem(itemViewModel: ItemViewModel)}
+
 //MARK:- Class
 
 class ItemsListViewController: UIViewController {
@@ -25,10 +29,24 @@ class ItemsListViewController: UIViewController {
     
     private let viewModel: ItemsListViewModel
     
-    private var removeFilterButton: UIButton!
+    private var removeFilterButton: UIButton = {
+        let removeFilterButton = UIButton(type: .custom)
+        removeFilterButton.setTitle("Remove filter", for: .normal)
+        removeFilterButton.setTitleColor(.white, for: .normal)
+        removeFilterButton.isHidden = true
+        removeFilterButton.setupCornerRadius()
+        removeFilterButton.backgroundColor = .orange
+        return removeFilterButton
+    }()
     
-    init(viewModel: ItemsListViewModel) {
+    // Use class protocol ItemDelegate to type delegate variable
+    public weak var delegate: ItemDelegate?
+    
+    //MARK:- Initialization
+    
+    init(viewModel: ItemsListViewModel, routingDelegate: ItemDelegate) {
         self.viewModel = viewModel
+        self.delegate = routingDelegate
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -65,23 +83,15 @@ class ItemsListViewController: UIViewController {
     }
     
     private func setupRemoveFilterButton() {
-        let button = UIButton(type: .custom)
-        button.setTitle("Remove filter", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.addTarget(self, action: #selector(removeFilterButtonPressed), for: .touchUpInside)
-        button.isHidden = true
-        button.setupCornerRadius()
-        button.backgroundColor = .orange
-        button.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(button)
+        removeFilterButton.addTarget(self, action: #selector(removeFilterButtonPressed), for: .touchUpInside)
+        removeFilterButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(removeFilterButton)
         
         NSLayoutConstraint.activate([
-            button.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor),
-            button.topAnchor.constraint(equalTo: collectionView.topAnchor),
-            button.widthAnchor.constraint(equalTo: collectionView.widthAnchor, multiplier: 0.3)
+            removeFilterButton.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor),
+            removeFilterButton.topAnchor.constraint(equalTo: collectionView.topAnchor),
+            removeFilterButton.widthAnchor.constraint(equalTo: collectionView.widthAnchor, multiplier: 0.3)
         ])
-        
-        self.removeFilterButton = button
     }
     
     // MARK: Button actions
@@ -102,7 +112,7 @@ class ItemsListViewController: UIViewController {
 extension ItemsListViewController {
     
     func linkCollectionViewToViewModel() {
-        viewModel.newDataAvailable = { [weak self ] in
+        viewModel.newDataAvailable = { [weak self] in
             self?.reloadCollectionViewData()
         }
         viewModel.displayRemoveFilterButton = { [weak self] shouldDisplayButton in
@@ -113,7 +123,7 @@ extension ItemsListViewController {
     }
     
     func configureCollectionView() {
-        viewModel.fetchListItems { [weak self ] error in
+        viewModel.fetchListItems { [weak self] error in
             if let error: ErrorService = error {
                 ErrorPresenter.showError(message: error.localizedDescription, on: self, dismissAction: nil)
             }
@@ -132,7 +142,7 @@ extension ItemsListViewController {
 // MARK: - Collection View DataSource & Delegate
 
 extension ItemsListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.numberOfItemsIn(section)
     }
@@ -144,10 +154,8 @@ extension ItemsListViewController: UICollectionViewDelegate, UICollectionViewDat
         ) as? ItemCollectionViewCell else {
             fatalError("Error cell dequeue")
         }
-        
         let model: ItemViewModel = viewModel.elementAt(indexPath)
         cell.configure(with: model)
-        
         return cell
     }
     
@@ -171,10 +179,13 @@ extension ItemsListViewController: UICollectionViewDelegate, UICollectionViewDat
             ItemCollectionViewCell.self,
             forCellWithReuseIdentifier: ItemCollectionViewCell.identifier
         )
-        
         return collectionView
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let viewModelSelected = viewModel.elementAt(indexPath)
+        delegate?.didSelectItem(itemViewModel: viewModelSelected)
+    }
     
     //MARK:- CollectionView Layout
     
@@ -196,6 +207,4 @@ extension ItemsListViewController: UICollectionViewDelegate, UICollectionViewDat
         
         return CGSize(width: itemWidth, height: itemHeight)
     }
-    
 }
-

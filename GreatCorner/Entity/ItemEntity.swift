@@ -26,7 +26,7 @@ struct ItemEntity: ModelInitializable {
             return nil
         }
     }
-        
+    
     // Initialize attributes from model thanks to ModelInitializable
     init(from model: ItemModel) {
         self.id = model.id
