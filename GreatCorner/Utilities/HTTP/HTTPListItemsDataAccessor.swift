@@ -1,5 +1,5 @@
 //
-//  GetItemsListData.swift
+//  HTTPListItemsData.swift
 //  GreatCorner
 //
 //  Created by Mathieu Chelim on 23/07/2021.
@@ -13,7 +13,7 @@ protocol GetItemsListData {
     func fetchListItems(completion: @escaping (Result<[ItemModel], Error>) -> Void)
 }
 
-struct HTTPListItemsDataAccessor: GetItemsListData {
+struct HTTPListItemsData: GetItemsListData {
     private let httpService: Network
     private let httpConfiguration: Configuration
     

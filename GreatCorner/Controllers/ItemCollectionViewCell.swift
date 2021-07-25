@@ -12,13 +12,13 @@ final class ItemCollectionViewCell: UICollectionViewCell {
     //MARK:- Properties
     
     static let identifier: String = "ItemCustomCell"
-        
+    
     private var topContainerView: UIView = {
         let topContainerView = UIView()
         topContainerView.backgroundColor = .clear
         return topContainerView
     }()
-        
+    
     private var bottomContainerView: UIView = {
         let bottomContainerView = UIView()
         bottomContainerView.backgroundColor = .clear
@@ -64,7 +64,7 @@ final class ItemCollectionViewCell: UICollectionViewCell {
     private var imageTask: URLSessionTask?
     
     //MARK:- Init Custom Cell
-        
+    
     // Initialize the new object immediately after memory for it has been allocated.
     init() {
         super.init(frame: .zero)
@@ -89,7 +89,7 @@ final class ItemCollectionViewCell: UICollectionViewCell {
     }
     
     //MARK:- Functions
-
+    
     // Setup all views
     private func setupCustomView() {
         setupContentView()
@@ -100,9 +100,9 @@ final class ItemCollectionViewCell: UICollectionViewCell {
     private func setupContentView() {
         setupCornerRadius()
     }
-        
+    
     // MARK: Setup Top Container
-
+    
     private func setupTopContainer() {
         topContainerView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(topContainerView)
@@ -117,7 +117,7 @@ final class ItemCollectionViewCell: UICollectionViewCell {
         setupImageView()
         setupIsUrgentPictureImageView()
     }
-        
+    
     private func setupImageView() {
         
         pictureImageView = UIImageView(frame: topContainerView.frame)
@@ -202,7 +202,7 @@ final class ItemCollectionViewCell: UICollectionViewCell {
     }
     
     //MARK:- Config Cell
-        
+    
     func configure(with model: ItemCellUIModel) {
         configTitleLabel(with: model.title)
         configPriceLabel(with: model.price)

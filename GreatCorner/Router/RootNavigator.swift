@@ -7,8 +7,6 @@
 
 import UIKit
 
-// Set RootNavigation
-
 //MARK:- Protocol
 
 protocol NavCoordinator {
@@ -21,15 +19,18 @@ protocol NavCoordinator {
 
 //MARK:- Class
 
-final class RootNavigator: NavCoordinator {
+final class RootNavigator: NavCoordinator, ItemDelegate {
     
     // MARK: Controller in charge of Navigation
+    
     let navigationController: UINavigationController
     
     // MARK: Dependency property to inject
+    
     private let httpService: HTTPService
     private let httpConfiguration: HTTPConfiguration
     
+    //MARK:- navigation Initialization
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -37,12 +38,23 @@ final class RootNavigator: NavCoordinator {
         self.httpService = HTTPService()
     }
     
+    //MARK:- Setup startPoint navigationController
+    
     func startPoint() {
-        let dataAccess = HTTPListItemsDataAccessor(httpService: httpService, httpConfiguration: httpConfiguration)
+        // Get all items configured while the viewController is displayed
+        let dataAccess = HTTPListItemsData(httpService: httpService, httpConfiguration: httpConfiguration)
         let fetchItemsListService = ItemsListService(dataAccessor: dataAccess)
         let viewModel = ItemsListViewModel(fetchItemsListService: fetchItemsListService)
-        let viewController = ItemsListViewController(viewModel: viewModel)
+        let viewController = ItemsListViewController(viewModel: viewModel, routingDelegate: self)
         navigationController.setViewControllers([viewController], animated: true)
+    }
+    
+    //MARK:- Setup navigation to itemDetailsViewController
+    
+    // Set the rootNavigation to push itemDetailsViewController if item is selected
+    func didSelectItem(itemViewModel: ItemViewModel) {
+        let itemDetailsViewController = ItemDetailsViewController(with: itemViewModel)
+        navigationController.pushViewController(itemDetailsViewController, animated: true)
     }
     
     

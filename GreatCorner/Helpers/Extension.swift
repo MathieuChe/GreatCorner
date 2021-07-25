@@ -16,6 +16,8 @@ extension UIView {
 
 extension UIImageView {
     func downloadImageFromURL(_ url: URL?, with placeholderImage: UIImage? = nil) -> URLSessionTask? {
+        
+        // Set image with placeholderImage by default async
         DispatchQueue.main.async {
             self.image = placeholderImage
         }
@@ -29,6 +31,7 @@ extension UIImageView {
                 return
             }
             
+            // If no error, set image with downloadedImage
             DispatchQueue.main.async {
                 self.image = downloadedImage
             }

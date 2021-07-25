@@ -9,8 +9,8 @@ import Foundation
 
 // To handle badDateFormat
 enum DateFormatterError: LocalizedError {
-        case badDateFormat
-    }
+    case badDateFormat
+}
 
 // Set the date as a string ISO formatted
 final class DateFormatter {
@@ -20,10 +20,10 @@ final class DateFormatter {
     }()
     
     func date(from string: String) throws -> Date {
-            guard let date = dateISOFormatter.date(from: string) else {
-                throw DateFormatterError.badDateFormat
-            }
-            
-            return date
+        guard let date = dateISOFormatter.date(from: string) else {
+            throw DateFormatterError.badDateFormat
         }
+        
+        return date
+    }
 }

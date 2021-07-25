@@ -7,7 +7,7 @@
 
 import UIKit
 
-//MARK:- Protocol
+//MARK:- Protocol Delegate
 
 protocol CategoryDelegate: class {
     func didSelectCategory(_ category: CategoryEntity)
@@ -27,6 +27,9 @@ final class CategoryViewController: UIViewController, UITableViewDataSource, UIT
     // Use class protocol CategoryDelegate to type delegate variable
     private weak var delegate: CategoryDelegate?
     
+    
+    //MARK:- Initialization
+    
     private init() {
         self.viewModel = CategoryViewModel()
         
@@ -44,13 +47,15 @@ final class CategoryViewController: UIViewController, UITableViewDataSource, UIT
         setupView()
     }
     
-    //MARK:- Functions
+    //MARK:- Navigation
     
     static func goToCategory(on viewController: UIViewController, delegate: CategoryDelegate) {
         let vc = CategoryViewController()
         vc.delegate = delegate
         viewController.present(vc, animated: true, completion: nil)
     }
+    
+    //MARK:- Setup LayoutConstraint
     
     private func setupView() {
         let tableView = UITableView()

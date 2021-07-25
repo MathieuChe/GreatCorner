@@ -89,14 +89,11 @@ enum CategoryEntity: CustomStringConvertible, CaseIterable {
             return "Enfants"
         }
     }
-
-    
+        
     init?(from category_id: Int) {
         guard let category = CategoryEntity(category_id: category_id) else {
             return nil
-            
         }
         self = category
     }
-    
 }

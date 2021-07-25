@@ -1,5 +1,5 @@
 //
-//  IGetItemsListService.swift
+//  ItemsListService.swift
 //  GreatCorner
 //
 //  Created by Mathieu Chelim on 23/07/2021.
@@ -24,9 +24,11 @@ final class ItemsListService: IGetItemsListService {
     
     func fetchListItems(completion: @escaping (Result<[ItemEntity], ErrorService>) -> Void) {
         dataAccessor.fetchListItems { (result: Result<[ItemModel], Error>) in
+            
+            // Map returns an new array transforming ItemModel by ItemEntity
             completion(
-                result.map { models -> [ItemEntity] in
-                    models.map(ItemEntity.init)
+                result.map { model -> [ItemEntity] in
+                    model.map(ItemEntity.init)
                 }
                 .mapError { error -> ErrorService in
                     guard let httpError = error as? HTTPError else {
