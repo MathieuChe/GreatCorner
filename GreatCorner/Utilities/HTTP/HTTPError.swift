@@ -37,3 +37,20 @@ enum HTTPError: LocalizedError {
     }
 }
 
+//MARK:- Equatable Protocol for HTTPError Unit Tests
+
+extension HTTPError: Equatable {
+    static func == (lhs: HTTPError, rhs: HTTPError) -> Bool {
+        switch (lhs, rhs) {
+        case (.badRequest, .badRequest):                    return true
+        case (.unauthorized, .unauthorized):                return true
+        case (.notFound, .notFound):                        return true
+        case (.internalServerError, .internalServerError):  return true
+        case (.decodingError, .decodingError):              return true
+        case (.noData, .noData):                            return true
+        case (.unknown(_), .unknown(_)):                    return true
+        default:                                            return false
+        }
+    }
+}
+
