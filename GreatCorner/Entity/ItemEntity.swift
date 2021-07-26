@@ -12,7 +12,7 @@ struct ItemEntity {
     
     let id: Int
     let title: String
-    let price: Double
+    let price: Float
     let category: CategoryEntity?
     let description: String
     let imageEntity: ImageEntity

@@ -23,8 +23,8 @@ final class CurrencyFormatter {
         return numberFormatter
     }()
     
-    func currency(from double: Double) throws -> String {
-        guard let currencyString = currencyFormatter.string(from: NSNumber(value: double)) else {
+    func currency(from float: Float) throws -> String {
+        guard let currencyString = currencyFormatter.string(from: NSNumber(value: float)) else {
             throw CurrencyFormatterError.badCurrencyFormat
         }
         
