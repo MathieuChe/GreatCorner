@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ErrorPresenter {
+final class ErrorPresenter {
     
     static func showError(message: String,
                           on viewController: UIViewController?,

@@ -7,7 +7,10 @@
 
 import Foundation
 
-struct CategoryModel: Decodable {
+struct CategoryModel {
     let id: Int
     let name: String
 }
+
+extension CategoryModel: Decodable {}
+

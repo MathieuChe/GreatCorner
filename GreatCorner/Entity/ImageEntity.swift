@@ -9,7 +9,7 @@ import Foundation
 
 // Set Image Entity with attributes
 
-struct ImageEntity: ModelInitializable {
+struct ImageEntity {
     let smallImageUrl: URL?
     let thumbImageUrl: URL?
     let defaultImageName: String
@@ -20,3 +20,5 @@ struct ImageEntity: ModelInitializable {
         self.defaultImageName = "No_photo"
     }
 }
+
+extension ImageEntity: ModelInitializable {}

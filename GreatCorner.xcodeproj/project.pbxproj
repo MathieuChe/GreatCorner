@@ -17,7 +17,7 @@
 		4E0BDCB526AAE48900B2CBA0 /* HTTPConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0BDCB426AAE48900B2CBA0 /* HTTPConfiguration.swift */; };
 		4E0BDCBD26AAE4BB00B2CBA0 /* HTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0BDCBC26AAE4BB00B2CBA0 /* HTTPService.swift */; };
 		4E0BDCC726AAE5C600B2CBA0 /* HTTPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0BDCC626AAE5C600B2CBA0 /* HTTPError.swift */; };
-		4E0BDCD526AAF27100B2CBA0 /* HTTPListItemsDataAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0BDCD426AAF27100B2CBA0 /* HTTPListItemsDataAccessor.swift */; };
+		4E0BDCD526AAF27100B2CBA0 /* HTTPListItemsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0BDCD426AAF27100B2CBA0 /* HTTPListItemsData.swift */; };
 		4E0BDCDA26AAF30200B2CBA0 /* ItemsListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0BDCD926AAF30200B2CBA0 /* ItemsListService.swift */; };
 		4E0BDCE226AAF3B900B2CBA0 /* ErrorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0BDCE126AAF3B900B2CBA0 /* ErrorService.swift */; };
 		4E0BDCE726AAFC6A00B2CBA0 /* ItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0BDCE626AAFC6A00B2CBA0 /* ItemCollectionViewCell.swift */; };
@@ -78,7 +78,7 @@
 		4E0BDCB426AAE48900B2CBA0 /* HTTPConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPConfiguration.swift; sourceTree = "<group>"; };
 		4E0BDCBC26AAE4BB00B2CBA0 /* HTTPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPService.swift; sourceTree = "<group>"; };
 		4E0BDCC626AAE5C600B2CBA0 /* HTTPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPError.swift; sourceTree = "<group>"; };
-		4E0BDCD426AAF27100B2CBA0 /* HTTPListItemsDataAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPListItemsDataAccessor.swift; sourceTree = "<group>"; };
+		4E0BDCD426AAF27100B2CBA0 /* HTTPListItemsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPListItemsData.swift; sourceTree = "<group>"; };
 		4E0BDCD926AAF30200B2CBA0 /* ItemsListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsListService.swift; sourceTree = "<group>"; };
 		4E0BDCE126AAF3B900B2CBA0 /* ErrorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorService.swift; sourceTree = "<group>"; };
 		4E0BDCE626AAFC6A00B2CBA0 /* ItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -195,7 +195,7 @@
 		4E0BDD8926AD83B100B2CBA0 /* HTTP */ = {
 			isa = PBXGroup;
 			children = (
-				4E0BDCD426AAF27100B2CBA0 /* HTTPListItemsDataAccessor.swift */,
+				4E0BDCD426AAF27100B2CBA0 /* HTTPListItemsData.swift */,
 				4E0BDC8B26AAD97100B2CBA0 /* HTTPEndPoint.swift */,
 				4E0BDCAF26AAE3E600B2CBA0 /* HTTPRequest.swift */,
 				4E0BDCB426AAE48900B2CBA0 /* HTTPConfiguration.swift */,
@@ -501,7 +501,7 @@
 				4E652A2F26AAB7F4005A64FC /* ItemsListViewController.swift in Sources */,
 				4E0BDD2126AB506400B2CBA0 /* ItemViewModel.swift in Sources */,
 				4E0BDC6526AAC58B00B2CBA0 /* ModelInitializable.swift in Sources */,
-				4E0BDCD526AAF27100B2CBA0 /* HTTPListItemsDataAccessor.swift in Sources */,
+				4E0BDCD526AAF27100B2CBA0 /* HTTPListItemsData.swift in Sources */,
 				4E0BDC5B26AAC55100B2CBA0 /* ItemEntity.swift in Sources */,
 				4E0BDD7026AC5C3400B2CBA0 /* CategoryViewController.swift in Sources */,
 				4E652A2B26AAB7F4005A64FC /* AppDelegate.swift in Sources */,

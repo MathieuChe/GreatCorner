@@ -34,7 +34,7 @@ final class ItemsListService: IGetItemsListService {
                     guard let httpError = error as? HTTPError else {
                         return ErrorService.unknown(error as NSError)
                     }
-                    return ErrorService.makeFromHttpError(httpError)
+                    return ErrorService.fromHttpError(httpError)
                 }
             )
         }
