@@ -40,9 +40,13 @@ class ItemsListViewModelTests: XCTestCase {
     
     override func tearDownWithError() throws {}
     
-    func test_itemsList_should_be_empty_when_viewModel_init() {
+    func test_itemsList_should_be_empty_when_init_viewModel() {
         XCTAssertTrue(viewModel.itemsList.isEmpty)
         }
+    
+    func test_dataView_should_be_empty_when_init_viewModel() {
+        XCTAssertTrue(viewModel.dataView.isEmpty)
+    }
     
     func test_dataList_should_be_sorted_by_creationDate() {
         
