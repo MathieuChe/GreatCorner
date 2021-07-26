@@ -11,7 +11,7 @@ import Foundation
 struct ItemModel {
     let id: Int
     let title: String
-    let price: Double
+    let price: Float
     let category_id: Int
     let description: String
     
