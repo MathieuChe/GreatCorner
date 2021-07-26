@@ -13,7 +13,7 @@ protocol ItemDelegate: class { func didSelectItem(itemViewModel: ItemViewModel)}
 
 //MARK:- Class
 
-class ItemsListViewController: UIViewController {
+final class ItemsListViewController: UIViewController {
     
     
     //MARK:- properties

@@ -8,7 +8,7 @@
 import Foundation
 
 // Set Item Model as decodable when decoding json data from API
-struct ItemModel: Decodable {
+struct ItemModel {
     let id: Int
     let title: String
     let price: Double
@@ -21,3 +21,4 @@ struct ItemModel: Decodable {
     let is_urgent: Bool
 }
 
+extension ItemModel: Decodable {}

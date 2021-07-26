@@ -23,7 +23,7 @@ enum ErrorService: LocalizedError {
         }
     }
     
-    static func makeFromHttpError(_ httpError: HTTPError) -> Self {
+    static func fromHttpError(_ httpError: HTTPError) -> Self {
         switch httpError {
         case .internalServerError, .noData:             return .serverError
         case .badRequest, .decodingError, .notFound:    return .appError

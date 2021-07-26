@@ -8,7 +8,7 @@
 import Foundation
 
 // Set Item Entity with attributes
-struct ItemEntity: ModelInitializable {
+struct ItemEntity {
     
     let id: Int
     let title: String
@@ -39,3 +39,5 @@ struct ItemEntity: ModelInitializable {
         self.isUrgent = model.is_urgent
     }
 }
+
+extension ItemEntity: ModelInitializable {}

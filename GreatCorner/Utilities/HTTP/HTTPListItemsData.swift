@@ -13,6 +13,8 @@ protocol GetItemsListData {
     func fetchListItems(completion: @escaping (Result<[ItemModel], Error>) -> Void)
 }
 
+//MARK:- Acces and send request
+
 struct HTTPListItemsData: GetItemsListData {
     private let httpService: Network
     private let httpConfiguration: Configuration

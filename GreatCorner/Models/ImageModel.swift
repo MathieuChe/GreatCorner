@@ -8,7 +8,9 @@
 import Foundation
 
 // Set Image Model as decodable when decoding json data from API
-struct ImageModel: Decodable {
+struct ImageModel {
     let small: String?
     let thumb: String?
 }
+
+extension ImageModel: Decodable {}
