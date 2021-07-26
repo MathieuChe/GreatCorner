@@ -7,7 +7,7 @@
 
 import Foundation
 
-// To handle badDateFormat
+// To handle badCurrencyFormat
 enum CurrencyFormatterError: LocalizedError {
     case badCurrencyFormat
 }

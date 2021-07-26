@@ -10,7 +10,8 @@ import UIKit
 //MARK:- Protocol
 
 protocol NavCoordinator {
-    // Only get this variable. Impossible to set it
+    
+    // Only get this variable. Don't need to set it
     var navigationController: UINavigationController { get }
     
     // Start at this ViewController
