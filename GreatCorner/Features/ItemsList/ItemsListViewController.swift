@@ -9,6 +9,7 @@ import UIKit
 
 //MARK:- Protocol Delegate
 
+// To bind action to model
 protocol ItemDelegate: class { func didSelectItem(itemViewModel: ItemViewModel)}
 
 //MARK:- Class

@@ -111,7 +111,7 @@ final class ItemCollectionViewCell: UICollectionViewCell {
                 topContainerView.topAnchor.constraint(equalTo: contentView.topAnchor),
                 topContainerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
                 topContainerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-                topContainerView.heightAnchor.constraint(equalToConstant: (3/4 * contentView.frame.height))
+                topContainerView.heightAnchor.constraint(equalToConstant: (3/4 * contentView.frame.size.height))
             ]
         )
         setupImageView()
