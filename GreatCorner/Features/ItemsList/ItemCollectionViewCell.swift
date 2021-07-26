@@ -215,8 +215,8 @@ final class ItemCollectionViewCell: UICollectionViewCell {
         titleLabel.text = title
     }
     
-    func configPriceLabel(with price: Double) {
-        priceLabel.text = "\(price)0 €"
+    func configPriceLabel(with price: String) {
+        priceLabel.text = price
     }
     
     func configCategoryLabel(with category: String) {
