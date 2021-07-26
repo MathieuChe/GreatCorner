@@ -10,6 +10,7 @@ import Foundation
 struct ItemViewModel {
     
     let dateFormatter: DateFormatter = DateFormatter()
+    let currencyFormatter: CurrencyFormatter = CurrencyFormatter()
     
     let model: ItemEntity
     

@@ -11,7 +11,7 @@ import Foundation
 
 protocol ItemCellUIModel {
     var title: String                       { get }
-    var price: Double                       { get }
+    var price: String                       { get }
     var imageUrl: URL?                      { get }
     var categoryDescription: String?        { get }
     var isUrgentPictureImageName: String?   { get }
@@ -25,7 +25,20 @@ extension ItemViewModel: ItemCellUIModel {
     var title: String                       { model.title }
     var imageUrl: URL?                      { model.imageEntity.smallImageUrl }
     var categoryDescription: String?        { model.category?.description }
-    var price: Double                       { model.price }
     var isUrgentPictureImageName: String?   { model.isUrgentImageName }
     var defaultPictureImageName: String     { model.imageEntity.defaultImageName }
+    
+    var price: String {
+        let currencyString: String
+        do {
+            currencyString = try currencyFormatter.currency(from: model.price)
+        } catch CurrencyFormatterError.badCurrencyFormat {
+            currencyString = "Bad format"
+        } catch {
+            currencyString = "\(error.localizedDescription)"
+        }
+        
+        return currencyString
+    }
+
 }

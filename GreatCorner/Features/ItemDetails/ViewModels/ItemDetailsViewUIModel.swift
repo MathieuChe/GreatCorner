@@ -30,11 +30,24 @@ extension ItemViewModel: ItemDetailsViewUIModel {
     var idString: String            { "id: \(model.id)" }
     var titleString: String         { "Title: \(model.title)" }
     var descriptionString: String   { "Description: \(model.description)" }
-    var priceString: String         { "Price: \(model.price)0 €" }
     var creationDateString: String  { "Creation date: \(model.creationDateString)" }
     var isUrgentString: String      { "isUrgent: \(model.isUrgent.description)" }
     var smallImageUrl: URL?         { model.imageEntity.smallImageUrl }
     var largeImageUrl: URL?         { model.imageEntity.thumbImageUrl }
+    
+    
+    var priceString: String {
+        let currencyString: String
+        do {
+            currencyString = try currencyFormatter.currency(from: model.price)
+        } catch CurrencyFormatterError.badCurrencyFormat {
+            currencyString = "Bad format"
+        } catch {
+            currencyString = "\(error.localizedDescription)"
+        }
+
+        return "Price: \(currencyString)"
+    }
     
     var categoryIdString: String {
         guard let id = model.category else { return "Category id: no id" }
