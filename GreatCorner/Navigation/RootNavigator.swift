@@ -15,7 +15,7 @@ protocol NavCoordinator {
     var navigationController: UINavigationController { get }
     
     // Start at this ViewController
-    func startPoint()
+    func start()
 }
 
 //MARK:- Class
@@ -41,7 +41,7 @@ final class RootNavigator: NavCoordinator, ItemDelegate {
     
     //MARK:- Setup startPoint navigationController
     
-    func startPoint() {
+    func start() {
         // Get all items configured while the viewController is displayed
         let dataAccess = HTTPListItemsData(httpService: httpService, httpConfiguration: httpConfiguration)
         let fetchItemsListService = ItemsListService(dataAccessor: dataAccess)

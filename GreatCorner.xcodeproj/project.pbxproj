@@ -154,12 +154,12 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
-		4E0BDC8726AAD1BB00B2CBA0 /* Router */ = {
+		4E0BDC8726AAD1BB00B2CBA0 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
 				4E652A6326AAB8D2005A64FC /* RootNavigator.swift */,
 			);
-			path = Router;
+			path = Navigation;
 			sourceTree = "<group>";
 		};
 		4E0BDC9E26AAE13200B2CBA0 /* Utilities */ = {
@@ -325,7 +325,7 @@
 				4E0BDC7326AAD14700B2CBA0 /* Entity */,
 				4E0BDDD126ADA6AE00B2CBA0 /* Features */,
 				4E0BDCEB26AB487900B2CBA0 /* Helpers */,
-				4E0BDC8726AAD1BB00B2CBA0 /* Router */,
+				4E0BDC8726AAD1BB00B2CBA0 /* Navigation */,
 				4E0BDC9E26AAE13200B2CBA0 /* Utilities */,
 				4E652A2A26AAB7F4005A64FC /* AppDelegate.swift */,
 				4E652A3326AAB7F9005A64FC /* Assets.xcassets */,

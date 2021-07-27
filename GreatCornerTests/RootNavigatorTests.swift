@@ -21,7 +21,7 @@ class RootNavigatorTests: XCTestCase {
     }
 
     func test_startPoint_should_set_first_viewController() {
-        rootNavigator.startPoint()
+        rootNavigator.start()
         
         XCTAssertTrue(rootNavigator.navigationController.viewControllers.first! is ItemsListViewController)
     }

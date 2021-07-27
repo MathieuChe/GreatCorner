@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func startRootCoordinator(with navigationController: UINavigationController) {
         // Start navigation with the initial view controller
         rootCoordinator = RootNavigator(navigationController: navigationController)
-        rootCoordinator.startPoint()
+        rootCoordinator.start()
     }
     
 }
